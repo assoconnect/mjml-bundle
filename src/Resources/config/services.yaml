@@ -1,0 +1,23 @@
+services:
+
+    # this config only applies to the services created by this file
+    _instanceof:
+        # services whose classes are instances of CustomInterface will be tagged automatically
+        Assoconnect\MJMLBundle\Tag\TagInterface:
+            tags: ['assoconnect_mjml.custom_tag']
+
+    assoconnect_mjml.custom_compiler:
+        class: Assoconnect\MJMLBundle\Compiler\CustomCompiler
+        arguments:
+            $tags: !tagged assoconnect_mjml.custom_tag
+
+    assoconnect_mjml.mjml_compiler:
+        class: Assoconnect\MJMLBundle\Compiler\MjmlCompiler
+
+    Assoconnect\MJMLBundle\CacheWarmer\CompileCacheWarmer:
+        tags:
+            - { name: "kernel.cache_warmer", priority: 50 }
+        arguments:
+            $customCompiler: "@assoconnect_mjml.custom_compiler"
+            $mjmlCompiler: "@assoconnect_mjml.mjml_compiler"
+            $projectDir: "%kernel.project_dir%"

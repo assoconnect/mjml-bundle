@@ -1,0 +1,36 @@
+{
+  "name": "assoconnect/mjml-bundle",
+  "description": "MJML template support for Twig template engine",
+  "type": "symfony-bundle",
+  "license": "MIT",
+  "keywords": ["MJML", "Twig"],
+  "authors": [
+    {
+      "name": "Assoconnect",
+      "homepage": "https://www.assoconnect.com"
+    },
+    {
+      "name": "Sylvain Fabre"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Assoconnect\\MJMLBundle\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Assoconnect\\MJMLBundle\\Tests\\": "tests/",
+      "Assoconnect\\MJMLBundle\\Tests\\Functional\\App\\": "tests/Functional/src/"
+    }
+  },
+  "require": {
+    "php": "^7.2",
+    "symfony/framework-bundle": "^4.2",
+    "symfony/process": "^4.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8.1",
+    "symfony/yaml": "^4.2"
+  }
+}

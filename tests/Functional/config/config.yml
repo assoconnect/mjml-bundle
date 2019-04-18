@@ -1,0 +1,13 @@
+framework:
+    secret: test
+
+services:
+    Assoconnect\MJMLBundle\Tests\Functional\App\:
+        public: true
+        resource: '../src/*'
+
+    Assoconnect\MJMLBundle\Tests\Functional\App\Tag\:
+        public: true
+        resource: '../src/Tag/*'
+        tags: [ 'assoconnect_mjml.custom_tag' ]
+

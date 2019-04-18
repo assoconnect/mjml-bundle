@@ -1,0 +1,21 @@
+os:
+  - linux
+
+language: php
+
+php:
+  - '7.2'
+  
+before_script:
+  - composer self-update
+  - composer install --no-interaction
+  - composer require php-coveralls/php-coveralls
+  - wget https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
+  - npm install -g mjml
+
+script:
+  - php phpcs.phar --standard=PSR12 ./src ./tests
+  - vendor/bin/phpunit --coverage-clover ./tests/logs/clover.xml
+
+after_script:
+  - vendor/bin/php-coveralls -v
