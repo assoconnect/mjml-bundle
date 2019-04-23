@@ -21,8 +21,7 @@ class Compiler
         MjmlCompiler $mjmlCompiler,
         string $cacheDir,
         string $projectDir
-    )
-    {
+    ) {
         $this->customCompiler = $customCompiler;
         $this->mjmlCompiler = $mjmlCompiler;
 
@@ -37,6 +36,7 @@ class Compiler
 
     /**
      * Compiles a MJML template with custom tags to HTML
+     *
      * @param SplFileInfo $file
      */
     public function compile(SplFileInfo $file)

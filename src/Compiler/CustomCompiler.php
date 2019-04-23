@@ -13,6 +13,7 @@ class CustomCompiler
 {
     /**
      * List of available custom tags
+     *
      * @var TagInterface[]
      */
     private $tags;
@@ -24,7 +25,8 @@ class CustomCompiler
 
     /**
      * Returns compiled custom tags to MJML base components
-     * @param string $contents MJML code with custom tags
+     *
+     * @param  string $contents MJML code with custom tags
      * @return string
      */
     public function compile(string $contents): string
@@ -47,7 +49,8 @@ class CustomCompiler
 
     /**
      * Returns the regex to match custom tag attribute and body
-     * @param TagInterface $tag
+     *
+     * @param  TagInterface $tag
      * @return string
      */
     private function getRegexp(TagInterface $tag): string
@@ -72,8 +75,9 @@ class CustomCompiler
 
     /**
      * Returns the MJML contents for a tag with given attributes
-     * @param TagInterface $tag
-     * @param iterable $match
+     *
+     * @param  TagInterface $tag
+     * @param  iterable     $match
      * @return string
      */
     private function toMJML(TagInterface $tag, iterable $match): string

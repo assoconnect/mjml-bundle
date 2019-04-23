@@ -25,8 +25,7 @@ class CompilerCommand extends Command
         Compiler $compiler,
         TemplateFinder $templateFinder,
         string $projectDir
-    )
-    {
+    ) {
         parent::__construct();
 
         $this->compiler = $compiler;
@@ -41,23 +40,28 @@ class CompilerCommand extends Command
             ->setDescription('Compiles a MJML template with custom tag to HTML')
             // the full command description shown when running the command with
             // the "--help" option
-            ->setHelp('This commands compiles a MJML template with custom tag to HTML. Without argument, all found templates will be compiled. Use the --template option to pick the template to compile.')
+            ->setHelp(
+                <<<EOD
+This commands compiles a MJML template with custom tag to HTML.
+Without argument, all found templates will be compiled.
+Use the --template option to pick the template to compile.
+EOD
+            )
             // arguments
-            ->addArgument('template', InputArgument::OPTIONAL, 'Template to compiler')
-        ;
+            ->addArgument('template', InputArgument::OPTIONAL, 'Template to compiler');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $template = $input->getArgument('template');
 
-        if(!$template) {
+        if (!$template) {
             $output->writeln('No template picked, searching for templates ...');
         }
 
         $templates = $this->templateFinder->find($template);
 
-        foreach($templates as $template) {
+        foreach ($templates as $template) {
             $output->writeln('Compiling: ' . $template->getFilename());
 
             $this->compiler->compile($template);

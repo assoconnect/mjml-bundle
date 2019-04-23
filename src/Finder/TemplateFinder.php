@@ -18,6 +18,7 @@ class TemplateFinder
 
     /**
      * Finds template to compiler
+     *
      * @return SplFileInfo[]
      */
     public function find(string $patterns = null): iterable
@@ -26,8 +27,7 @@ class TemplateFinder
         $templates = $finder
             ->files()
             ->in($this->projectDir . '/templates/mjml')
-            ->name($patterns ?? '*.mjml.twig')
-        ;
+            ->name($patterns ?? '*.mjml.twig');
 
         return iterator_to_array($templates->getIterator());
     }

@@ -41,9 +41,11 @@ class CompilerCommandTest extends TestCase
     {
         $command = $this->getCommand();
         $commandTester = new CommandTester($command);
-        $commandTester->execute([
+        $commandTester->execute(
+            [
             'template' => 'custom.mjml.twig'
-        ]);
+            ]
+        );
 
         $output = $commandTester->getDisplay();
 
