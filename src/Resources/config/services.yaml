@@ -11,13 +11,36 @@ services:
         arguments:
             $tags: !tagged assoconnect_mjml.custom_tag
 
-    assoconnect_mjml.mjml_compiler:
-        class: Assoconnect\MJMLBundle\Compiler\MjmlCompiler
-
-    Assoconnect\MJMLBundle\CacheWarmer\CompileCacheWarmer:
-        tags:
-            - { name: "kernel.cache_warmer", priority: 50 }
+    assoconnect_mjml.compiler:
+        class: Assoconnect\MJMLBundle\Compiler\Compiler
         arguments:
             $customCompiler: "@assoconnect_mjml.custom_compiler"
             $mjmlCompiler: "@assoconnect_mjml.mjml_compiler"
+            $cacheDir: "%kernel.cache_dir%"
+            $projectDir: "%kernel.project_dir%"
+
+
+    assoconnect_mjml.mjml_compiler:
+        class: Assoconnect\MJMLBundle\Compiler\MjmlCompiler
+
+    assoconnect_mjml.template_finder:
+        class: Assoconnect\MJMLBundle\Finder\TemplateFinder
+        arguments:
+            $projectDir: "%kernel.project_dir%"
+
+    assoconnect_mjml.cache_warmer:
+        class: Assoconnect\MJMLBundle\CacheWarmer\CompileCacheWarmer
+        tags:
+            - { name: "kernel.cache_warmer", priority: 50 }
+        arguments:
+            $compiler: "@assoconnect_mjml.compiler"
+            $templateFinder: "@assoconnect_mjml.template_finder"
+
+    assoconnect_mjml.command:
+        class: Assoconnect\MJMLBundle\Command\CompilerCommand
+        tags:
+            - { name: "console.command" }
+        arguments:
+            $compiler: "@assoconnect_mjml.compiler"
+            $templateFinder: "@assoconnect_mjml.template_finder"
             $projectDir: "%kernel.project_dir%"

@@ -8,19 +8,19 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
-class BootTest extends KernelTestCase
+abstract class TestCase extends KernelTestCase
 {
-    public static function getKernelClass()
+    public function setUp(): void
     {
-        return TestKernel::class;
+        parent::setUp();
+
+        $this->cleanUp();
     }
 
     /**
-     * Kernel booting will trigger a cache warming up
-     * We just need to ensure that the html file is resolved
-     * and that it does not contain any <mj-XXX> tag nor <asc-XXX>
+     * Removes files that are supposed to be created by the tests
      */
-    public function testSuccess()
+    protected function cleanUp()
     {
         // We first remove the legacy files
         $finder = new Finder();
@@ -36,10 +36,10 @@ class BootTest extends KernelTestCase
         if ($folder = realpath(__DIR__ . '/../var')) {
             $filesystem->remove($folder);
         }
+    }
 
-        // Kernel booting will clear the cache and warm it up
-        self::bootKernel();
-
+    public function helperSuccess()
+    {
         // New file exists
         $compiledFile = __DIR__ . '/../templates/mjml/custom.html.twig';
         $this->assertFileExists($compiledFile);
@@ -48,5 +48,10 @@ class BootTest extends KernelTestCase
         $contents = file_get_contents($compiledFile);
         $this->assertStringNotContainsString('<mj-', $contents);
         $this->assertStringNotContainsString('<asc-', $contents);
+    }
+
+    public static function getKernelClass()
+    {
+        return TestKernel::class;
     }
 }
