@@ -16,4 +16,4 @@ As compiling MJML code to HTML code is slow, this bundle follows this process:
 - during cache warmup, these templates are compiled to HTML and Twig expressions are not resolved
 - you use the compiled HTML templates with Twig and all the variables you need with you favorite email sending system
 
-[How to use](Resources/doc/index.md) 
+[How to use](src/Resources/doc/index.md) 

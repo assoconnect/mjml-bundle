@@ -64,7 +64,12 @@ class Button implements TagInterface
     
     public function getMJML(string $body,iterable $attributes): string
     {
-        return '<mjml-button background-color="red" size="' . $attributes['size'] . '">' . $body . '</mjml-button>';
+        return <<<EOT
+<mjml-button
+    background-color="red"
+    size="{$attributes['size']}"
+ >{$body}</mjml-button>
+EOT;
     }
 }
 ```
