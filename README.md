@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/assoconnect/mjml-bundle.svg?branch=master)](https://travis-ci.org/assoconnect/mjml-bundle)
 [![Coverage Status](https://coveralls.io/repos/github/assoconnect/mjml-bundle/badge.svg?branch=master)](https://coveralls.io/github/assoconnect/mjml-bundle?branch=master)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mjml-bundle&metric=alert_status)](https://sonarcloud.io/dashboard?id=mjml-bundle)
 
 This Symfony 4 bundle provides the integration of the [MJML command line tool](https://mjml.io/documentation/#command-line-interface) to create responsive emails as Twig templates.
 
