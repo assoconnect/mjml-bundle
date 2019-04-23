@@ -1,11 +1,5 @@
 services:
 
-    # this config only applies to the services created by this file
-    _instanceof:
-        # services whose classes are instances of CustomInterface will be tagged automatically
-        Assoconnect\MJMLBundle\Tag\TagInterface:
-            tags: ['assoconnect_mjml.custom_tag']
-
     assoconnect_mjml.custom_compiler:
         class: Assoconnect\MJMLBundle\Compiler\CustomCompiler
         arguments:
