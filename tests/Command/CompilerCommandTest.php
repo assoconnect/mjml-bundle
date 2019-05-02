@@ -43,12 +43,29 @@ class CompilerCommandTest extends TestCase
         $commandTester = new CommandTester($command);
         $commandTester->execute(
             [
-            'template' => 'custom.mjml.twig'
+            'template' => 'custom'
             ]
         );
 
         $output = $commandTester->getDisplay();
 
         $this->helperSuccess();
+    }
+
+    /**
+     * Tests that a given template is compiled
+     */
+    public function testCompileOneNotFound()
+    {
+        $command = $this->getCommand();
+        $commandTester = new CommandTester($command);
+        $commandTester->execute(
+            [
+            'template' => 'hello'
+            ]
+        );
+
+        $output = $commandTester->getDisplay();
+        $this->assertStringContainsString('has not been found', $output);
     }
 }
