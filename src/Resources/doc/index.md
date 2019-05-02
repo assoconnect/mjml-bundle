@@ -77,7 +77,7 @@ EOT;
 Files' name and location
 ------------------------
 
-Template files are expected to be into the `/template/mjml` folder and must follow this naming pattern: `*.mjml.twig`.
+Template files are expected to be into the `/templates/mjml` folder and must follow this naming pattern: `*.mjml.twig`.
 
 HTML files are generated on Symfony cache warm-up and are in the same folder but named as `*.html.twig`.
 
