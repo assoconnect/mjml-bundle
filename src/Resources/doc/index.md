@@ -91,7 +91,7 @@ The bundle also provides a Symfony command to compile all or just one template:
 php bin/console mjml:compiler
 
 // Compiling just one template
-php bin/console mjml:compiler --template=test.mjml.html
+php bin/console mjml:compiler test.mjml.html
 ```
 
 Debug
