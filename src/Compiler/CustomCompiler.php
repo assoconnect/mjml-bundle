@@ -31,11 +31,12 @@ class CustomCompiler
      */
     public function compile(string $contents): string
     {
+        $customTagFound = false;
         // We look for the custom tags in the template
         foreach ($this->tags as $tag) {
             $regex = $this->getRegexp($tag);
-
             if (preg_match_all($regex, $contents, $matches, PREG_SET_ORDER)) {
+                $customTagFound = true;
                 foreach ($matches as $match) {
                     // Converting to MJML
                     $mjml = $this->toMJML($tag, $match);
@@ -44,7 +45,13 @@ class CustomCompiler
                 }
             }
         }
-        return $contents;
+
+        // We have to replace all custom tags, so the compilation is needed while a custom tag is found and replaced
+        if ($customTagFound) {
+            return self::compile($contents);
+        } else {
+            return $contents;
+        }
     }
 
     /**
@@ -70,7 +77,7 @@ class CustomCompiler
         // Tag closing
         $regexp .= '<\/' . $tag->getName() . '>';
 
-        return '/' . $regexp . '/m';
+        return '/' . $regexp . '/msU';
     }
 
     /**
