@@ -62,8 +62,10 @@ EOD
         $templates = $this->templateFinder->find($template);
 
         // User wants to compile a specific template but it was not found
-        if($template && !$templates) {
-            $output->writeln(sprintf('<error>Template "/templates/mjml/%s.mjml.twig" has not been found.</error>', $template));
+        if ($template && !$templates) {
+            $output->writeln(
+                sprintf('<error>Template "/templates/mjml/%s.mjml.twig" has not been found.</error>', $template)
+            );
         }
 
         foreach ($templates as $template) {

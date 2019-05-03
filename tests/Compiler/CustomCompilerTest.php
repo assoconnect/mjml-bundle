@@ -90,4 +90,24 @@ EOD;
 
         $this->assertSame($mjml, $compiler->compile($contents));
     }
+
+    /**
+     * With multiple nested tags
+     */
+    public function testCompileMultipleNested()
+    {
+        $compiler = $this->getCompiler();
+        $contents = <<<EOD
+<asc-test-attributes>
+    <asc-test-simple>Line 1</asc-test-simple>
+</asc-test-attributes>
+EOD;
+        $mjml = <<<EOD
+<mjml-raw a="b" foo="bar" hello="world">
+    <mj-text>Line 1</mj-text>
+</mjml-raw>
+EOD;
+
+        $this->assertSame($mjml, $compiler->compile($contents));
+    }
 }
