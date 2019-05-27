@@ -5,20 +5,20 @@ MJML command line tool
 ----------------------
 
 ```console
-$ npm install --global mjml
+npm install --global mjml
 ```
 
 This bundle
 -----------
 
 ```console
-$ composer require Assoconnect/mjml-bundle
+composer require Assoconnect/mjml-bundle
 ```
 
 How to use
 ==========
 
-Creating custom HTML tag
+Creating a custom HTML tag
 ------------------------
 
 You need to create one PHP class per custom HTML tag.
@@ -81,6 +81,9 @@ Template files are expected to be into the `/templates/mjml` folder and must fol
 
 HTML files are generated on Symfony cache warm-up and are in the same folder but named as `*.html.twig`.
 
+This files should not be commited to your GIT repository: ignore them with this rule `/template/mjml/*.html.twig` in `/.gitignore` file.
+If you are using Symfony 4, you do not need to create this rule as this bundle comes with a recipe that takes care of it.
+
 Compile command
 ---------------
 
@@ -92,6 +95,60 @@ php bin/console mjml:compiler
 
 // Compiling just one template
 php bin/console mjml:compiler test.mjml.html
+```
+
+Using it with Twig
+------------------
+
+You can now use this template with Twig:
+
+```html
+<mjml>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+
+        <mj-text font-size="20px" color="#F45E43" font-family="helvetica">Hello World</mj-text>
+		
+		<acme-button>Click me!</acme-button>
+
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
+```
+
+```php
+<?php
+# src/Service/EmailerService.php
+namespace App\Service;
+
+use Twig\Environment;
+
+class EmailerService
+{
+	protected $twig;
+	
+	public function __construct(Environment $twig)
+	{
+		$this->twig = $twig;
+	}
+	
+	public function sendEmail()
+	{
+		$templateFile = 'mjml/my_template.html.twig';
+		
+		$template = $this->twig->load($templateFile);
+		
+		$html = $template->render([
+			// place here the variables to resolve in your template
+			'firstname' => 'John',
+		]);
+		
+		// implement here your email sending logic
+		// $html contains the HTML to use as email body
+	}
+}
 ```
 
 Debug
