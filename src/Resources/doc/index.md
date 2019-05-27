@@ -62,12 +62,17 @@ class Button implements TagInterface
         ];
     }
     
-    public function getMJML(string $body,iterable $attributes): string
+    public function getMJML(string $body, iterable $attributes): string
     {
+        if($attributes['size'] === 'big') {
+	    $height = 200;
+	} else {
+	    $height = 100;
+	}
         return <<<EOT
 <mj-button
     background-color="red"
-    size="{$attributes['size']}"
+    height="{$height}px"
  >{$body}</mj-button>
 EOT;
     }
