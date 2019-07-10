@@ -20,7 +20,7 @@ before_script:
 script:
   - php phpcs.phar --standard=PSR12 ./src ./tests
   - vendor/bin/phpunit --coverage-clover ./tests/logs/clover.xml --log-junit ./tests/logs/phpunit.report.xml
-  - sonar-scanner
+  - 'if [ ! -z "$SONAR_TOKEN" ]; then sonar-scanner; fi'
 
 after_script:
   - vendor/bin/php-coveralls -v
