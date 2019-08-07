@@ -18,6 +18,6 @@ before_script:
   - npm install -g mjml
   
 script:
+  - php phpcs.phar --standard=PSR12  ./tests ./src
   - vendor/bin/phpunit --coverage-clover ./tests/logs/clover.xml --log-junit ./tests/logs/phpunit.report.xml
-  - php phpcs.phar --standard=PSR12 --ignore=./vendor ./
   - 'if [ ! -z "$SONAR_TOKEN" ]; then sonar-scanner; fi'
