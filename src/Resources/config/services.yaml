@@ -11,8 +11,6 @@ services:
             $customCompiler: "@assoconnect_mjml.custom_compiler"
             $mjmlCompiler: "@assoconnect_mjml.mjml_compiler"
             $cacheDir: "%kernel.cache_dir%"
-            $projectDir: "%kernel.project_dir%"
-
 
     assoconnect_mjml.mjml_compiler:
         class: Assoconnect\MJMLBundle\Compiler\MjmlCompiler
@@ -21,6 +19,7 @@ services:
         class: Assoconnect\MJMLBundle\Finder\TemplateFinder
         arguments:
             $projectDir: "%kernel.project_dir%"
+            $templatePaths: "%assoconnect_mjml.template_paths%"
 
     assoconnect_mjml.cache_warmer:
         class: Assoconnect\MJMLBundle\CacheWarmer\CompileCacheWarmer

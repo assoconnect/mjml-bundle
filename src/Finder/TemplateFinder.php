@@ -11,9 +11,15 @@ class TemplateFinder
 {
     protected $projectDir;
 
-    public function __construct(string $projectDir)
+    /**
+     * @var array
+     */
+    private $templatePaths;
+
+    public function __construct(string $projectDir, array $templatePaths)
     {
         $this->projectDir = $projectDir;
+        $this->templatePaths = $templatePaths;
     }
 
     /**
@@ -23,12 +29,44 @@ class TemplateFinder
      */
     public function find(string $patterns = null): iterable
     {
-        $finder = new Finder();
-        $templates = $finder
-            ->files()
-            ->in($this->projectDir . '/templates/mjml')
-            ->name($patterns ?? '*.mjml.twig');
+        $templates = [];
+        foreach ($this->templatePaths as $templatePath) {
+            $finder = new Finder();
 
-        return iterator_to_array($templates->getIterator());
+            $templateIterator = $finder
+                ->files()
+                ->in($this->projectDir . $templatePath)
+                ->name($patterns ?? '*.mjml.twig')
+                ->getIterator();
+            array_push(
+                $templates,
+                ... array_values(iterator_to_array($templateIterator))
+            );
+        }
+
+        $this->findDuplicates($templates);
+
+        return $templates;
+    }
+
+    private function findDuplicates($templates)
+    {
+        $templatesNames = array_map(function (SplFileInfo $a) {
+            return $a->getFilename();
+        }, $templates);
+
+        $duplicates = array();
+        foreach (array_count_values($templatesNames) as $val => $c) {
+            if ($c > 1) {
+                $duplicates[] = $val;
+            }
+        }
+
+        if (array_count_values($duplicates)) {
+            throw new DuplicatesTemplatesNameException(sprintf(
+                'Duplicates template name found %s',
+                implode(',', $duplicates)
+            ));
+        }
     }
 }

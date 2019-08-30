@@ -89,6 +89,13 @@ HTML files are generated on Symfony cache warm-up and are in the same folder but
 This files should not be commited to your GIT repository: ignore them with this rule `/template/mjml/*.html.twig` in `/.gitignore` file.
 If you are using Symfony 4, you do not need to create this rule as this bundle comes with a recipe that takes care of it.
 
+If you need multiple templates paths or don't want to put templates in `/templates/mjml`, then add a config like this :
+```
+assoconnect_mjml:
+    template_paths:
+        - /templates/mjml
+        - /templates/folder/subfolder/mjml
+```
 Compile command
 ---------------
 

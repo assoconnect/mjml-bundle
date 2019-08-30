@@ -12,22 +12,15 @@ class Compiler
 
     private $mjmlCompiler;
 
-    private $htmlDir;
-
     private $tmpDir;
 
     public function __construct(
         CustomCompiler $customCompiler,
         MjmlCompiler $mjmlCompiler,
-        string $cacheDir,
-        string $projectDir
+        string $cacheDir
     ) {
         $this->customCompiler = $customCompiler;
         $this->mjmlCompiler = $mjmlCompiler;
-
-        // HTML folder
-        $this->htmlDir = $projectDir . '/templates/mjml';
-        $this->ensureDirExists($this->htmlDir);
 
         // Tmp folder
         $this->tmpDir = $cacheDir . '/assoconnect/mjml';
@@ -57,7 +50,7 @@ class Compiler
 
         // MJML => HTML
         $htmlFilename = str_replace('.mjml.', '.html.', $file->getFilename());
-        $htmlFile = $this->htmlDir . '/' . $htmlFilename;
+        $htmlFile = $file->getPath() . '/' . $htmlFilename;
         $this->mjmlCompiler->compile($mjmlFile, $htmlFile);
     }
 
