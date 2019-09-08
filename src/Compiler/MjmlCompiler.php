@@ -9,7 +9,7 @@ use Symfony\Component\Process\Process;
 /**
  * Compiles a MJML file to an HTML file
  */
-class MjmlCompiler
+class MjmlCompiler implements MjmlCompilerInterface
 {
     public function compile(string $input, string $output)
     {

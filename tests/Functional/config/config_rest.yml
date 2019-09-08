@@ -1,0 +1,38 @@
+framework:
+    secret: test
+
+services:
+    Assoconnect\MJMLBundle\Tests\Functional\App\:
+        public: true
+        resource: '../src/*'
+
+    assoconnect_mjml.mjml_compiler_service:
+        alias: assoconnect_mjml.rest_mjml_compiler
+
+    Assoconnect\MJMLBundle\Tests\Functional\App\Tag\:
+        public: true
+        resource: '../src/Tag/*'
+        tags: [ 'assoconnect_mjml.custom_tag' ]
+
+    assoconnect_mjml.rest_mjml_compiler_client:
+        class: GuzzleHttp\Client
+        public: true
+        arguments:
+            - base_uri: '%assoconnect_mjml.rest_mjml_compiler_host%'
+              handler: '@assoconnect_mjml.rest_mjml_compiler_client_handler_stack'
+
+    assoconnect_mjml.rest_mjml_compiler_client_handler_stack_factory:
+        class: Assoconnect\MJMLBundle\Tests\RestCompiler\RestCompilerHandlerStackFactory
+        arguments:
+            $temporaryDirectory : "%kernel.cache_dir%"
+
+    assoconnect_mjml.rest_mjml_compiler_client_handler_stack:
+        class: GuzzleHttp\HandlerStack
+        factory: ['@assoconnect_mjml.rest_mjml_compiler_client_handler_stack_factory','create']
+
+assoconnect_mjml:
+    rest_mjml_compiler_host: "http://192.168.99.100:3002"
+    template_paths:
+        - /templates/mjml
+        - /templates/folder/subfolder/mjml
+

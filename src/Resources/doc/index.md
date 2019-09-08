@@ -171,3 +171,40 @@ The bundle processes the templates in two steps:
 2. Compiling MJML tags to HTML tags
 
 During the first step, the bundle creates temporary files in the `%kernel.cache_dir%/assoconnect_mjml`. You may review their content with the [live editor](https://mjml.io/try-it-live) for debugging purpose. 
+
+Using an external REST mjml compiler 
+------------------------------------
+If you don't want to install mjml locally, you can use a external rest mjml compiler
+
+**Configuration**
+ 
+To do so, modify your configuration as follow:
+```yaml
+assoconnect_mjml:
+    rest_mjml_compiler_host: "http://mjml-rest-server-address:3000"
+
+```
+you also have to alias `assoconnect_mjml.mjml_compiler_service` to `assoconnect_mjml.rest_mjml_compiler` in services.yaml
+```yaml
+services:
+....
+    assoconnect_mjml.mjml_compiler_service:
+        alias: assoconnect_mjml.rest_mjml_compiler
+```
+
+**Mjml rest service** 
+
+The mjml rest service must be a `post` route accepting a json as parameter containing one key:
+```
+```json
+{
+  "mjml":"<mjml><mj-body>....</mj-body></mjml>"
+}
+```  
+returning format is a json  
+```json
+{
+  "html":"<body>....</body>"
+}
+```
+example in https://github.com/micoli/docker-mjml-server

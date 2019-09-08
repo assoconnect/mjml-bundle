@@ -23,6 +23,9 @@ class Configuration implements ConfigurationInterface
                     ->prototype('scalar')->end()
                     ->defaultValue(['/templates/mjml'])
                 ->end() // template_paths
+                ->variableNode('rest_mjml_compiler_host')
+                    ->defaultValue('http://127.0.0.1:3000')
+                ->end()
             ->end();
 
         return $treeBuilder;

@@ -16,7 +16,7 @@ class Compiler
 
     public function __construct(
         CustomCompiler $customCompiler,
-        MjmlCompiler $mjmlCompiler,
+        MjmlCompilerInterface $mjmlCompiler,
         string $cacheDir
     ) {
         $this->customCompiler = $customCompiler;

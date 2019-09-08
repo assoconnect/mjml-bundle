@@ -3,3 +3,5 @@
 /tests/Functional/templates/**/*html.twig
 /tests/Functional/var/*
 /vendor/*
+phpcs.phar
+.phpunit.result.cache

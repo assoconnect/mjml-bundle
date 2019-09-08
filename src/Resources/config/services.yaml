@@ -9,8 +9,17 @@ services:
         class: Assoconnect\MJMLBundle\Compiler\Compiler
         arguments:
             $customCompiler: "@assoconnect_mjml.custom_compiler"
-            $mjmlCompiler: "@assoconnect_mjml.mjml_compiler"
+            $mjmlCompiler: "@assoconnect_mjml.mjml_compiler_service"
             $cacheDir: "%kernel.cache_dir%"
+
+    assoconnect_mjml.rest_mjml_compiler_client:
+      class: GuzzleHttp\Client
+      public: true
+      arguments:
+        - base_uri: '%assoconnect_mjml.rest_mjml_compiler_host%'
+
+    assoconnect_mjml.mjml_compiler_service:
+      alias: assoconnect_mjml.mjml_compiler
 
     assoconnect_mjml.mjml_compiler:
         class: Assoconnect\MJMLBundle\Compiler\MjmlCompiler
