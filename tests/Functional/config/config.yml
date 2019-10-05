@@ -11,3 +11,8 @@ services:
         resource: '../src/Tag/*'
         tags: [ 'assoconnect_mjml.custom_tag' ]
 
+assoconnect_mjml:
+    template_paths:
+        - /templates/mjml
+        - /templates/folder/subfolder/mjml
+

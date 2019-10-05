@@ -21,6 +21,11 @@ class AssoconnectMJMLExtension extends Extension
         );
         $loader->load('services.yaml');
 
+        $configuration = new Configuration();
+
+        $config = $this->processConfiguration($configuration, $configs);
+        $container->setParameter('assoconnect_mjml.template_paths', $config['template_paths']);
+
         // all classes implementing TagInterface will be tagged with assoconnect_mjml.custom_tag
         // so the bundle user does not need to tag these
         $container->registerForAutoconfiguration(TagInterface::class)
