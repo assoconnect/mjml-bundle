@@ -61,7 +61,7 @@ class TemplateFinder
                 $duplicates[] = $val;
             }
         }
-
+        
         if (array_count_values($duplicates)) {
             throw new DuplicatesTemplatesNameException(sprintf(
                 'Duplicates template name found %s',
