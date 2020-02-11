@@ -38,10 +38,12 @@ class TemplateFinder
                 ->in($this->projectDir . $templatePath)
                 ->name($patterns ?? '*.mjml.twig')
                 ->getIterator();
-            array_push(
-                $templates,
-                ... array_values(iterator_to_array($templateIterator))
-            );
+            if (iterator_count($templateIterator) > 0) {
+                array_push(
+                    $templates,
+                    ... array_values(iterator_to_array($templateIterator))
+                );
+            }
         }
 
         $this->findDuplicates($templates);

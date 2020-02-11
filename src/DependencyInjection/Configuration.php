@@ -9,8 +9,8 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('assoconnect_mjml');
+        $treeBuilder = new TreeBuilder('assoconnect_mjml');
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->children()

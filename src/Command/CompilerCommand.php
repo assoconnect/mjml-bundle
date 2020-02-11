@@ -73,5 +73,7 @@ EOD
 
             $this->compiler->compile($template);
         }
+
+        return 0;
     }
 }
