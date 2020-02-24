@@ -18,6 +18,11 @@ services:
       arguments:
         - base_uri: '%assoconnect_mjml.rest_mjml_compiler_host%'
 
+    assoconnect_mjml.rest_mjml_compiler:
+        class: Assoconnect\MJMLBundle\Compiler\RestMjmlCompiler
+        arguments:
+            $client: "@assoconnect_mjml.rest_mjml_compiler_client"
+
     assoconnect_mjml.mjml_compiler_service:
       alias: assoconnect_mjml.mjml_compiler
 
