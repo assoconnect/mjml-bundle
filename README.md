@@ -1,6 +1,6 @@
-# AssoconnectMJMLBundle
+# DEPRECATED - AssoconnectMJMLBundle
 
-## This bundle has been abandoned
+This bundle has been deprecated & abandoned because it is no longer used at AssoConnect
 
 [![Build Status](https://travis-ci.org/assoconnect/mjml-bundle.svg?branch=master)](https://travis-ci.org/assoconnect/mjml-bundle)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=assoconnect_mjml-bundle&metric=alert_status)](https://sonarcloud.io/dashboard?id=assoconnect_mjml-bundle)
